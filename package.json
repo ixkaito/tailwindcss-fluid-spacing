@@ -1,12 +1,36 @@
 {
   "name": "tailwindcss-dynamic-spacing",
-  "version": "0.1.0",
+  "version": "0.1.0-beta.1",
+  "description": "A Tailwind CSS plugin that provides fluid-responsive spacings across viewport widths.",
   "main": "src/index.js",
   "license": "MIT",
   "repository": "https://github.com/ixkaito/tailwindcss-dynamic-spacing",
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "tailwind",
+    "tailwindcss",
+    "plugin",
+    "spacing",
+    "responsive",
+    "dynamic",
+    "fluid",
+    "viewport",
+    "vw",
+    "clamp",
+    "min",
+    "max",
+    "padding",
+    "margin",
+    "width",
+    "height",
+    "maxHeight",
+    "gap",
+    "inset",
+    "space",
+    "translate"
+  ],
   "prettier": {
     "printWidth": 100,
     "semi": false,
