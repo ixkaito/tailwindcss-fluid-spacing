@@ -1,0 +1,28 @@
+{
+  "name": "tailwindcss-dynamic-spacing",
+  "version": "0.1.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "repository": "https://github.com/ixkaito/tailwindcss-dynamic-spacing",
+  "publishConfig": {
+    "access": "public"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "scripts": {
+    "prepublishOnly": "node scripts/build.js"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=2.0.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.0",
+    "clean-css": "^4.2.1",
+    "postcss": "^8.2.2",
+    "tailwindcss": "^2.0.2"
+  }
+}
