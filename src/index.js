@@ -14,9 +14,11 @@ const dynamicSpacing = plugin(({ addUtilities }) => {
 },
 {
   theme: {
-    spacing: {
-      'vw-4': '1.25vw',
-      'vw-8': '2.5vw',
+    extend: {
+      spacing: {
+        'vw-4': '1.25vw',
+        'vw-8': '2.5vw',
+      },
     },
   },
 })
