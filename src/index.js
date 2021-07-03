@@ -38,7 +38,7 @@ const dynamicSpacing = plugin.withOptions(
 
               for (const [screenName, screenSize] of Object.entries(screens)) {
                 const max = (parseFloat(screenSize) * value) / 100
-                spacing[`vw-${name}-max-${screenName}`] = `min(${value}vw, ${rem(max)})`
+                spacing[`vw-${name}-max@${screenName}`] = `min(${value}vw, ${rem(max)})`
               }
             }
 
@@ -51,7 +51,7 @@ const dynamicSpacing = plugin.withOptions(
             for (const [name, value] of Object.entries(values)) {
               for (const [screenName, screenSize] of Object.entries(screens)) {
                 const max = (parseFloat(screenSize) * value) / 100
-                margin[`-vw-${name}-max-${screenName}`] = `max(-${value}vw, -${rem(max)})`
+                margin[`-vw-${name}-max@${screenName}`] = `max(-${value}vw, -${rem(max)})`
               }
             }
 
