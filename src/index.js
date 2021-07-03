@@ -1,54 +1,65 @@
 const plugin = require('tailwindcss/plugin')
 
 const rem = (px) => {
-  return (parseInt(px) / 16).toFixed(4).replace(/\.?0+$/, '') + 'rem'
+  return (parseFloat(px) / 16).toFixed(4).replace(/\.?0+$/, '') + 'rem'
 }
 
-const interval = 1.25
+const dynamicSpacing = plugin.withOptions(
+  () => {
+    return () => {
+      // empty
+    }
+  },
+  (options) => {
+    const names = [
+      ...(options?.names ?? Object.keys(require('tailwindcss/defaultTheme').spacing)),
+      ...(options?.extend?.names ?? []),
+    ]
+      .filter((name) => Number(name) !== 0 && !isNaN(name))
+      .map((name) => `${name}`)
 
-const dynamicSpacing = plugin(
-  () => {},
-  {
-    theme: {
-      extend: {
-        spacing: theme => {
-          const screens = theme('screens')
-          const spacing = {}
+    const values = names.reduce(
+      (acc, cur) => ({
+        ...acc,
+        [cur]: cur * 0.3125,
+      }),
+      {}
+    )
 
-          for (let i = 1; i <= 16; i++) {
-            const key = `${i * 4}`
-            const vw = interval * i
+    return {
+      theme: {
+        extend: {
+          spacing: (theme) => {
+            const screens = theme('screens')
+            const spacing = {}
 
-            spacing[`vw-${key}`] = `${vw}vw`
+            for (const [name, value] of Object.entries(values)) {
+              spacing[`vw-${name}`] = `${value}vw`
 
-            for (const screen in screens) {
-              const max = (parseInt(screens[screen], 10) * vw) / 100
-              spacing[`vw-${key}-max-${screen}`] = `min(${vw}vw, ${rem(max)})`
+              for (const [screenName, screenSize] of Object.entries(screens)) {
+                const max = (parseFloat(screenSize) * value) / 100
+                spacing[`vw-${name}-max-${screenName}`] = `min(${value}vw, ${rem(max)})`
+              }
             }
-          }
 
-          return spacing
+            return spacing
+          },
+          margin: (theme) => {
+            const screens = theme('screens')
+            const margin = {}
+
+            for (const [name, value] of Object.entries(values)) {
+              for (const [screenName, screenSize] of Object.entries(screens)) {
+                const max = (parseFloat(screenSize) * value) / 100
+                margin[`-vw-${name}-max-${screenName}`] = `max(-${value}vw, -${rem(max)})`
+              }
+            }
+
+            return margin
+          },
         },
-        margin: theme => {
-          const screens = theme('screens')
-          const margin = {}
-
-          for (let i = 1; i <= 16; i++) {
-            const key = `${i * 4}`
-            const vw = interval * i
-
-            margin[`-vw-${key}`] = `-${vw}vw`
-
-            for (const screen in screens) {
-              const max = (parseInt(screens[screen], 10) * vw) / 100
-              margin[`-vw-${key}-max-${screen}`] = `max(-${vw}vw, -${rem(max)})`
-            }
-          }
-
-          return margin
-        }
       },
-    },
+    }
   }
 )
 
