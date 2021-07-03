@@ -1,6 +1,6 @@
 {
   "name": "tailwindcss-dynamic-spacing",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A Tailwind CSS plugin that provides fluid-responsive spacings across viewport widths.",
   "main": "src/index.js",
   "license": "MIT",
