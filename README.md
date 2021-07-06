@@ -1,4 +1,4 @@
-# tailwindcss-dynamic-spacing
+# tailwindcss-fluid-spacing
 
 A Tailwind CSS plugin that provides fluid-responsive spacings across viewport widths.
 
@@ -7,11 +7,11 @@ A Tailwind CSS plugin that provides fluid-responsive spacings across viewport wi
 Install the plugin from npm:
 
 ```sh
-npm install -D tailwindcss-dynamic-spacing
+npm install -D tailwindcss-fluid-spacing
 ```
 or
 ```sh
-yarn add -D tailwindcss-dynamic-spacing
+yarn add -D tailwindcss-fluid-spacing
 ```
 
 Then add the plugin to your `tailwind.config.js` file:
@@ -23,7 +23,7 @@ module.exports = {
     // ...
   },
   plugins: [
-    require('tailwindcss-dynamic-spacing'),
+    require('tailwindcss-fluid-spacing'),
     // ...
   ],
 }
