@@ -2,7 +2,7 @@
   "name": "tailwindcss-fluid-spacing",
   "version": "0.3.0",
   "description": "A Tailwind CSS plugin that provides fluid-responsive spacings across viewport widths.",
-  "main": "src/index.js",
+  "main": "index.js",
   "license": "MIT",
   "repository": "https://github.com/ixkaito/tailwindcss-fluid-spacing",
   "publishConfig": {
