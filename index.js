@@ -15,8 +15,8 @@ const dynamicSpacing = plugin.withOptions(
       ...(options?.sizes ?? Object.keys(require('tailwindcss/defaultTheme').spacing)),
       ...(options?.extend?.sizes ?? []),
     ]
-      .filter((name) => Number(name) !== 0 && !isNaN(name))
-      .map((name) => `${name}`)
+      .filter((size) => Number(size) !== 0 && !isNaN(size))
+      .map((size) => `${size}`)
 
     const values = sizes.reduce(
       (acc, cur) => ({
@@ -33,12 +33,12 @@ const dynamicSpacing = plugin.withOptions(
             const screens = theme('screens')
             const spacing = {}
 
-            for (const [name, value] of Object.entries(values)) {
-              spacing[`vw-${name}`] = `${value}vw`
+            for (const [size, value] of Object.entries(values)) {
+              spacing[`vw-${size}`] = `${value}vw`
 
               for (const [screenName, screenSize] of Object.entries(screens)) {
                 const max = (parseFloat(screenSize) * value) / 100
-                spacing[`vw-${name}-max@${screenName}`] = `min(${value}vw, ${rem(max)})`
+                spacing[`vw-${size}-max@${screenName}`] = `min(${value}vw, ${rem(max)})`
               }
             }
 
@@ -48,10 +48,10 @@ const dynamicSpacing = plugin.withOptions(
             const screens = theme('screens')
             const margin = {}
 
-            for (const [name, value] of Object.entries(values)) {
+            for (const [size, value] of Object.entries(values)) {
               for (const [screenName, screenSize] of Object.entries(screens)) {
                 const max = (parseFloat(screenSize) * value) / 100
-                margin[`-vw-${name}-max@${screenName}`] = `max(-${value}vw, -${rem(max)})`
+                margin[`-vw-${size}-max@${screenName}`] = `max(-${value}vw, -${rem(max)})`
               }
             }
 
