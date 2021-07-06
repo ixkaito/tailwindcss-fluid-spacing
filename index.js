@@ -11,14 +11,14 @@ const dynamicSpacing = plugin.withOptions(
     }
   },
   (options) => {
-    const names = [
-      ...(options?.names ?? Object.keys(require('tailwindcss/defaultTheme').spacing)),
-      ...(options?.extend?.names ?? []),
+    const sizes = [
+      ...(options?.sizes ?? Object.keys(require('tailwindcss/defaultTheme').spacing)),
+      ...(options?.extend?.sizes ?? []),
     ]
       .filter((name) => Number(name) !== 0 && !isNaN(name))
       .map((name) => `${name}`)
 
-    const values = names.reduce(
+    const values = sizes.reduce(
       (acc, cur) => ({
         ...acc,
         [cur]: cur * 0.3125,
