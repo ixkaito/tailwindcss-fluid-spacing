@@ -70,9 +70,14 @@ const dynamicSpacing = plugin.withOptions(
         extend: {
           spacing: (theme) => {
             return propValues(theme('screens'))
-
           },
           margin: (theme) => {
+            return propValues(theme('screens'), 'negative')
+          },
+          inset: (theme) => {
+            return propValues(theme('screens'), 'negative')
+          },
+          translate: (theme) => {
             return propValues(theme('screens'), 'negative')
           },
         },
