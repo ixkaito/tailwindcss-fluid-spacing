@@ -11,7 +11,7 @@ const dynamicSpacing = plugin.withOptions(
     }
   },
   (options) => {
-    const propValues = (screens, pn = 'positive') => {
+    const spacing = (screens, pn = 'positive') => {
       const sizes = [
         ...(options?.sizes ?? Object.keys(require('tailwindcss/defaultTheme').spacing)),
         ...(options?.extend?.sizes ?? []),
@@ -27,22 +27,22 @@ const dynamicSpacing = plugin.withOptions(
         {}
       )
 
-      const prop = {}
+      const obj = {}
 
       for (const [size, value] of Object.entries(values)) {
         if (pn === 'positive') {
-          prop[`vw-${size}`] = `${value}vw`
+          obj[`vw-${size}`] = `${value}vw`
         }
 
         for (const [screenName, screenSize] of Object.entries(screens)) {
           const minmax = (parseFloat(screenSize) * value) / 100
 
           if (pn === 'positive') {
-            prop[`vw-${size}-min@${screenName}`] = `max(${rem(minmax)}, ${value}vw)`
-            prop[`vw-${size}-max@${screenName}`] = `min(${value}vw, ${rem(minmax)})`
+            obj[`vw-${size}-min@${screenName}`] = `max(${rem(minmax)}, ${value}vw)`
+            obj[`vw-${size}-max@${screenName}`] = `min(${value}vw, ${rem(minmax)})`
           } else if (pn === 'negative') {
-            prop[`-vw-${size}-min@${screenName}`] = `min(-${rem(minmax)}, -${value}vw)`
-            prop[`-vw-${size}-max@${screenName}`] = `max(-${value}vw, -${rem(minmax)})`
+            obj[`-vw-${size}-min@${screenName}`] = `min(-${rem(minmax)}, -${value}vw)`
+            obj[`-vw-${size}-max@${screenName}`] = `max(-${value}vw, -${rem(minmax)})`
           }
 
           for (const [screenName2, screenSize2] of Object.entries(screens)) {
@@ -50,11 +50,11 @@ const dynamicSpacing = plugin.withOptions(
             const minmax2 = (parseFloat(screenSize2) * value) / 100
 
             if (pn === 'positive') {
-              prop[`vw-${size}-min@${screenName}-max@${screenName2}`] = `clamp(
+              obj[`vw-${size}-min@${screenName}-max@${screenName2}`] = `clamp(
                 ${rem(minmax)}, ${value}vw, ${rem(minmax2)}
               )`
             } else if (pn === 'negative') {
-              prop[`-vw-${size}-min@${screenName}-max@${screenName2}`] = `clamp(
+              obj[`-vw-${size}-min@${screenName}-max@${screenName2}`] = `clamp(
                 -${rem(minmax2)}, -${value}vw, -${rem(minmax)}
               )`
             }
@@ -62,23 +62,23 @@ const dynamicSpacing = plugin.withOptions(
         }
       }
 
-      return prop
+      return obj
     }
 
     return {
       theme: {
         extend: {
           spacing: (theme) => {
-            return propValues(theme('screens'))
+            return spacing(theme('screens'))
           },
           margin: (theme) => {
-            return propValues(theme('screens'), 'negative')
+            return spacing(theme('screens'), 'negative')
           },
           inset: (theme) => {
-            return propValues(theme('screens'), 'negative')
+            return spacing(theme('screens'), 'negative')
           },
           translate: (theme) => {
-            return propValues(theme('screens'), 'negative')
+            return spacing(theme('screens'), 'negative')
           },
         },
       },
