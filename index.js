@@ -38,10 +38,10 @@ const dynamicSpacing = plugin.withOptions(
           const minmax = (parseFloat(screenSize) * value) / 100
 
           if (pn === 'positive') {
-            obj[`vw-${size}-min@${screenName}`] = `max(${rem(minmax)}, ${value}vw)`
+            obj[`vw-${size}-min@${screenName}`] = `max(${value}vw, ${rem(minmax)})`
             obj[`vw-${size}-max@${screenName}`] = `min(${value}vw, ${rem(minmax)})`
           } else if (pn === 'negative') {
-            obj[`-vw-${size}-min@${screenName}`] = `min(-${rem(minmax)}, -${value}vw)`
+            obj[`-vw-${size}-min@${screenName}`] = `min(-${value}vw, -${rem(minmax)})`
             obj[`-vw-${size}-max@${screenName}`] = `max(-${value}vw, -${rem(minmax)})`
           }
 
