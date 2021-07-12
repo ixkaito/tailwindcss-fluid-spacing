@@ -57,13 +57,15 @@ To control the fluid-spacing at a specific breakpoint, add a `{screen}:` prefix 
 <div class="md:p-vw-8">...</div>
 ```
 
-To provide a maximum value, add a `-max@{screen}` suffix to any existing utility. For example, the class `w-vw-80-max@lg` would provide the `25vw` value with the maximum value `16rem (256px)` which equals `25vw` at the large screen.
+To provide a minimum or a maximum value, add a `-{min|max}@{screen}` suffix to any existing utility; to privide both minmun and maximum values, add a `-min@{screen}-max@{screen}` suffix. For example, the class `mt-vw-16-min@sm` would provide the `5vw` value with the minmum value `2rem (32px)` which equals `5vw` at the small screen.
 
 ```html
-<div class="w-vw-80-max@lg">...</div>
+<div class="mt-vw-16-min@sm">...</div> <!-- margin-top: max(5vw, 2rem); -->
+<div class="mt-vw-16-max@xl">...</div> <!-- margin-top: min(5vw, 4rem); -->
+<div class="mt-vw-16-min@sm-max@xl">...</div> <!-- margin-top: clamp( 2rem, 5vw, 4rem ); -->
 ```
 
-The `-max@{screen}` suffix is also available for any breakpoint.
+The `-{min|max}@{screen}` and `-min@{screnn}-max@{screen}` suffixes are also available for any breakpoint.
 
 ```html
 <div class="my-10 sm:my-vw-20-max@xl">...</div>
